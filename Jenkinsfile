@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+         stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
         stage('Build') {
             steps {
                 sh '''
@@ -12,11 +17,7 @@ pipeline {
                 '''
             }
         }
-        stage('Clean Workspace') {
-            steps {
-                deleteDir()
-            }
-        }
+       
         stage('push') {
             steps {
                 script {
