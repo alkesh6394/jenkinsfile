@@ -14,40 +14,27 @@ pipeline {
         }
 
         stage('push') {
-            when {
-                expression {
-                    return env.BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
-                    echo "pushed"
+                    if (env.BRANCH_NAME == 'master') {
+                        input message: "Do you want to continue", ok: "Yes, we should"
+                        echo "pushed"
+                    } else {
+                        echo "We cannot push"
+                    }
                 }
             }
         }
 
         stage('apply') {
-            when {
-                expression {
-                    return env.BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
-                    echo "apply"
-                }
-            }
-        }
-        
-        stage('No push or apply') {
-            when {
-                expression {
-                    return env.BRANCH_NAME != 'master'
-                }
-            }
-            steps {
-                script {
-                    echo "No push or apply"
+                    if (env.BRANCH_NAME == 'master') {
+                        input message: "Do you want to continue", ok: "Yes, we should"
+                        echo "apply"
+                    } else {
+                        echo "We cannot apply"
+                    }
                 }
             }
         }
