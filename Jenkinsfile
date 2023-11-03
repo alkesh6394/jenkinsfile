@@ -42,23 +42,15 @@ pipeline {
 
     post {
         success {
-            stage('Notification - Success') {
-                steps {
-                   script{
-                    def message="Your-Jenkins-Pipeline-Run-Successfully"
-                  slackSend(channel: 'jenkins-pipeline', message: message, tokenCredentialId: 'C059M7SJL0K')
-                   }
-                }
+            script {
+                def message = "Your Jenkins Pipeline Ran Successfully"
+                slackSend(channel: 'jenkins-pipeline', message: message, tokenCredentialId: 'C059M7SJL0K')
             }
         }
         failure {
-            stage('Notification - Failure') {
-                steps {
-                    script{
-                    def message="Your-Jenkins-Pipeline-Not-Run-Successfully"
-                  slackSend(channel: 'jenkins-pipeline', message: message, tokenCredentialId: 'C059M7SJL0K')
-                   }
-                }
+            script {
+                def message = "Your Jenkins Pipeline Did Not Run Successfully"
+                slackSend(channel: 'jenkins-pipeline', message: message, tokenCredentialId: 'C059M7SJL0K')
             }
         }
     }
