@@ -23,9 +23,9 @@ pipeline {
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         input message: "Do you want to continue", ok: "Yes, we should"
-                        echo "pushed"
+                        echo "pushed ${deply-tag}"
                     } else {
-                        echo "We cannot push"
+                        echo "We cannot push ${deply-tag}"
                     }
                 }
             }
@@ -36,9 +36,9 @@ pipeline {
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         input message: "Do you want to continue", ok: "Yes, we should"
-                        echo "apply"
+                        echo "apply  ${deply-tag}"
                     } else {
-                        echo "We cannot apply"
+                        echo "We cannot apply  ${deply-tag}"
                     }
                 }
             }
