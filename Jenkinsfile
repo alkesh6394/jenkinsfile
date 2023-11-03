@@ -12,7 +12,11 @@ pipeline {
                 '''
             }
         }
-
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
         stage('push') {
             steps {
                 script {
