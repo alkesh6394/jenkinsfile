@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-         stage('Clean Workspace') {
+        stage('Clean Workspace') {
             steps {
                 deleteDir()
             }
@@ -17,15 +17,15 @@ pipeline {
                 '''
             }
         }
-       
+
         stage('push') {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         input message: "Do you want to continue", ok: "Yes, we should"
-                        echo "pushed ${deply-tag}"
+                        echo "pushed ${deploy-tag}"
                     } else {
-                        echo "We cannot push ${deply-tag}"
+                        echo "We cannot push ${deploy-tag}" 
                     }
                 }
             }
@@ -36,9 +36,9 @@ pipeline {
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         input message: "Do you want to continue", ok: "Yes, we should"
-                        echo "apply  ${deply-tag}"
+                        echo "apply ${deploy-tag}"
                     } else {
-                        echo "We cannot apply  ${deply-tag}"
+                        echo "We cannot apply ${deploy-tag}"
                     }
                 }
             }
